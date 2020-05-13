@@ -22,29 +22,48 @@ const render = require("./lib/htmlRenderer");
     //ask if they want to add an employee
     //4th question depends on answer from 3rd question
 
+
+function promptEmployee() {
+    return inquirer.prompt ([
+        { 
+            type: "input",
+            name: "name",
+            message: "What is your manager's name?"  
+        },
+
+        { 
+            type: "input",
+            name: "id",
+            message: "What is your manager's id number?",
+        },
+
+        { 
+            type: "input",
+            name: "email",
+            message: "What is your manager's email?",
+         
+        }
+    ])
+}
+
+promptEmployee()
+.then(function(answers){
+//how do I get the employee questions to link to the 4th appropriate question?
+    promptManager(answers);
+})
+.catch(function(err){
+    console.log(err);
+})
+
+
+
 function promptManager() {
     return inquirer.prompt ([
-        { type: "input",
-          name: "name",
-          message: "What is your manager's name?"  
-        },
-
-        { type: "input",
-          name: "id",
-          message: "What is your manager's id number?",
-        },
-
-        { type: "input",
-          name: "email",
-          message: "What is your manager's email?",
-         
-        },
-
-        { type: "input",
-          name: "office",
-          message: "What is the manager's office number?"
+        { 
+            type: "input",
+            name: "office",
+            message: "What is the manager's office number?"
         }
-
     ])
 }
 promptManager()
@@ -57,6 +76,56 @@ promptManager()
 })
 
 
+function chooseNext () {
+    return inquirer.prompt ([
+        {
+            type: "list",
+            name: "next",
+            message: "Which type of employee would you like to add?",
+            choices: ["Engineer", "Intern", "I don't want to enter another employee"]
+        }
+    ])
+}
+chooseNext()
+.then(function(answers){
+    switch (answers) {
+        case "Engineer":
+            promptEngineer();
+            break;
+        case "Intern":
+            promptIntern();
+            break;
+        default:
+            break;
+    }
+
+})
+.catch(function(err){
+    console.log(err);
+})
+
+
+
+
+function promptEngineer() {
+
+    return inquirer.prompt ([
+        { 
+            type: "input",
+            name: "name",
+            message: "What is your manager's name?"  
+        }
+
+
+    ])
+}
+promptEngineer()
+.then(function(answers){
+    console.log(answers);
+})
+.catch(function(err){
+    console.log(err);
+})
 
 
 

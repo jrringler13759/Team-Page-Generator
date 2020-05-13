@@ -22,8 +22,9 @@ const render = require("./lib/htmlRenderer");
     //ask if they want to add an employee
     //4th question depends on answer from 3rd question
 
+    //employee to manager or just manager and then Engineer and Intern
 
-function promptEmployee() {
+function promptManager() {
     return inquirer.prompt ([
         { 
             type: "input",
@@ -35,41 +36,29 @@ function promptEmployee() {
             type: "input",
             name: "id",
             message: "What is your manager's id number?",
+            validate: needANumber(userInput.id)
         },
 
         { 
             type: "input",
             name: "email",
             message: "What is your manager's email?",
-         
-        }
-    ])
-}
+            validate: ""
+        },
 
-promptEmployee()
-.then(function(answers){
-//how do I get the employee questions to link to the 4th appropriate question?
-    promptManager(answers);
-})
-.catch(function(err){
-    console.log(err);
-})
-
-
-
-function promptManager() {
-    return inquirer.prompt ([
         { 
             type: "input",
             name: "office",
-            message: "What is the manager's office number?"
+            message: "What is the manager's office number?",
+            when: ""
         }
     ])
 }
+
 promptManager()
 .then(function(answers){
-    const manager = new Manager(answers.name, answers.id, answers.email, answers.office);
-    console.log(manager);
+//how do I get the employee questions to link to the 4th appropriate question?
+    chooseNext();
 })
 .catch(function(err){
     console.log(err);
@@ -83,49 +72,34 @@ function chooseNext () {
             name: "next",
             message: "Which type of employee would you like to add?",
             choices: ["Engineer", "Intern", "I don't want to enter another employee"]
-        }
-    ])
-}
-chooseNext()
-.then(function(answers){
-    switch (answers) {
-        case "Engineer":
-            promptEngineer();
-            break;
-        case "Intern":
-            promptIntern();
-            break;
-        default:
-            break;
-    }
+        },
 
-})
-.catch(function(err){
-    console.log(err);
-})
-
-
-
-
-function promptEngineer() {
-
-    return inquirer.prompt ([
         { 
             type: "input",
-            name: "name",
-            message: "What is your manager's name?"  
-        }
+            name: "github",
+            message: "What is your engineer's GitHub username?" 
+            when: (userInput) => {if(userInput.next === "Engineer"){
+                
+            }} 
+        },
 
+        { 
+            type: "input",
+            name: "school",
+            message: "What is your intern's school?"  
+        },
 
+        
     ])
 }
-promptEngineer()
-.then(function(answers){
-    console.log(answers);
-})
-.catch(function(err){
-    console.log(err);
-})
+
+
+
+
+
+
+
+
 
 
 

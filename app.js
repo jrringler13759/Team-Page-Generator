@@ -23,35 +23,33 @@ const render = require("./lib/htmlRenderer");
     //4th question depends on answer from 3rd question
 
 function promptManager() {
-    return inquirer.prompt (
-    { type: "input",
-      name: "name",
-      message: "What is your manager's name?"  
-    },
+    return inquirer.prompt ([
+        { type: "input",
+          name: "name",
+          message: "What is your manager's name?"  
+        },
 
-    {  type: "input",
-       name: "id",
-       message: "What is your manager's id number?",
-       validate: "number"
-    },
+        { type: "input",
+          name: "id",
+          message: "What is your manager's id number?",
+        },
 
-    {  type: "input",
-       name: "email",
-       message: "What is your manager's email?",
-       validate: function validateEmail(){
-           validator.validate(this.email);
+        { type: "input",
+          name: "email",
+          message: "What is your manager's email?",
+         
+        },
+
+        { type: "input",
+          name: "office",
+          message: "What is the manager's office number?"
         }
-    },
 
-    {  type: "input",
-       name: "office number",
-       message: "What is the manager's office number?"
-    }
-
-)}
+    ])
+}
 promptManager()
 .then(function(answers){
-    const manager = new Manager(answers.name, answers.id, answers.email);
+    const manager = new Manager(answers.name, answers.id, answers.email, answers.office);
     console.log(manager);
 })
 .catch(function(err){

@@ -1,3 +1,4 @@
+const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
@@ -13,6 +14,28 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+
+    //ask the manager questions
+    //ask if they want to add an employee
+    //4th question depends on answer from 3rd question
+
+function promptManager() {
+    return inquirer.prompt (
+    { type: "input",
+      name: "name",
+      message: "What is your name?"
+        
+    }
+//if answer to next employee = blah then call function for 
+
+    )
+}
+
+
+const manager = new Employee("Janice", 3, "janice@practice.com");
+
+
+
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will

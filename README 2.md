@@ -68,7 +68,20 @@ app.js         // Runs the application
 
 * The different employee types should all inherit some methods and properties from a base class of `Employee`.
 
+
+
+
+WHAT DOES THIS MEAN???
+
 * In your HTML template files, you may want to add a placeholder character that helps your program identify where the dynamic markup begins and ends.
+
+
+
+
+
+
+
+
 
 ## Minimum Requirements
 

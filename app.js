@@ -1,3 +1,4 @@
+const validator = require("email-validator");
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
@@ -6,8 +7,10 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
+//what are these? Are we not using util to promisify?
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
+
 
 const render = require("./lib/htmlRenderer");
 
@@ -23,16 +26,39 @@ function promptManager() {
     return inquirer.prompt (
     { type: "input",
       name: "name",
-      message: "What is your name?"
-        
+      message: "What is your manager's name?"  
+    },
+
+    {  type: "input",
+       name: "id",
+       message: "What is your manager's id number?",
+       validate: "number"
+    },
+
+    {  type: "input",
+       name: "email",
+       message: "What is your manager's email?",
+       validate: function validateEmail(){
+           validator.validate(this.email);
+        }
+    },
+
+    {  type: "input",
+       name: "office number",
+       message: "What is the manager's office number?"
     }
-//if answer to next employee = blah then call function for 
 
-    )
-}
+)}
+promptManager()
+.then(function(answers){
+    const manager = new Manager(answers.name, answers.id, answers.email);
+    console.log(manager);
+})
+.catch(function(err){
+    console.log(err);
+})
 
 
-const manager = new Employee("Janice", 3, "janice@practice.com");
 
 
 

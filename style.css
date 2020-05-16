@@ -3,17 +3,25 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+#myTeam {
+    font-size: 56px;
+}
+
 .team-heading {
     background-color: rgb(98, 98, 99);
     color: white;
     font-weight: bold;
 }
 
+.row{
+    justify-content: center;
+}
+
 .card {
     margin: 20px;
     background-color: rgba(196, 149, 241, 0.377);
     width: 350px;
-    float: left;
+
 }
 
 .card-header {

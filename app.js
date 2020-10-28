@@ -97,7 +97,7 @@ function promptManager() {
     ])
 }
 promptManager()
-.then(function(answers){
+.then(answers => {
     const manager = new Manager(answers.name, answers.id, answers.email, answers.office);
     employees.push(manager);
     ids.push(answers.id);
@@ -136,7 +136,7 @@ function promptEngineer(){
             validate: validateGithub
         }
     ])
-    .then(function(answers){
+    .then(answers => {
         const engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
         employees.push(engineer);
         ids.push(answers.id);
@@ -176,7 +176,7 @@ function promptIntern(){
             validate: validateSchool
         }
     ])
-    .then(function(answers){
+    .then(answers => {
         const intern = new Intern(answers.name, answers.id, answers.email, answers.school);
         employees.push(intern);
         ids.push(answers.id);
@@ -198,7 +198,7 @@ function chooseNext () {
             choices: ["Engineer", "Intern", "I don't want to enter another employee"]
         }
     ])
-    .then(function(ans){
+    .then(ans => {
         switch (ans.next) {
             case "Engineer":
                 promptEngineer();
